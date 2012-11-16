@@ -1,0 +1,25 @@
+{
+  "name": "My First Extension",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "The first extension that I made.",
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "css": [
+        "page/coffee.css"
+      ],
+      "js": [
+        "page/coffee-script.js",
+        "page/codearea.js",
+        "page/tmpl.js",
+        "page/handle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs", "management", "http://*/*"
+  ]
+
+}
