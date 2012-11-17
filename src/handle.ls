@@ -119,6 +119,8 @@ window.puts = (...args) ->
 window.purge = ->
   (query '#coffee-result').innerHTML = ''
 
+window.select = query
+
 window.onload = ->
   window.add-event-listener \keydown ->
     # show it

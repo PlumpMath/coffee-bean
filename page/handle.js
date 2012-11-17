@@ -137,6 +137,7 @@
   window.purge = function(){
     return query('#coffee-result').innerHTML = '';
   };
+  window.select = query;
   window.onload = function(){
     return window.addEventListener('keydown', function(){
       var detectBox;
