@@ -1,8 +1,8 @@
 {
-  "name": "My First Extension",
+  "name": "coffee-bean",
   "version": "1.0",
   "manifest_version": 2,
-  "description": "The first extension that I made.",
+  "description": "run CoffeeScript as content scripts",
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
