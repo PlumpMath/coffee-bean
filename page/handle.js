@@ -1,28 +1,29 @@
 (function(){
-  var main, slice$ = [].slice;
-  main = function(){
-    var delay, query, show, area, body, coffeeBox, coffeeCode, coffeeDrag, ctrlPressed;
-    delay = function(){
-      return setTimeout(arguments[1](arguments[0]));
-    };
-    query = function(it){
-      return document.querySelector(it);
-    };
-    show = function(){
-      var args;
-      args = slice$.call(arguments);
-      return console.log.apply(console, args);
-    };
-    show(CoffeeScript);
+  var delay, query, keepEnd, set, get, coffeeInit, coffeeDestroy, escape, stringify, slice$ = [].slice;
+  delay = function(){
+    return setTimeout(arguments[1](arguments[0]));
+  };
+  query = function(it){
+    return document.querySelector(it);
+  };
+  window.show = function(){
+    var args;
+    args = slice$.call(arguments);
+    return console.log.apply(console, args);
+  };
+  keepEnd = true;
+  set = function(key, value){
+    return localStorage.setItem(key, value);
+  };
+  get = function(key){
+    return localStorage.getItem(key);
+  };
+  coffeeInit = function(){
+    var area, body, coffeeBox, coffeeCode, lastCode, that, coffeeDrag, ctrlPressed, result;
     area = {
       "/coffee-box": {
         'textarea/coffee-code': '',
-        '/coffee-result': {
-          '/coffee-ctrl': {
-            'span/coffee-run': 'run'
-          },
-          '/coffee-content': ''
-        }
+        '/coffee-result': ''
       }
     };
     body = query('body');
@@ -32,6 +33,10 @@
     coffeeCode = coffeeBox.querySelector('#coffee-code');
     show('new', coffeeCode);
     codearea(coffeeCode);
+    lastCode = get('coffee-code');
+    if ((that = lastCode) != null) {
+      coffeeCode.value = that;
+    }
     coffeeDrag = query('#coffee-drag');
     ctrlPressed = false;
     document.body.addEventListener('keydown', function(event){
@@ -44,7 +49,8 @@
         return ctrlPressed = false;
       }
     });
-    return coffeeBox.onmousedown = function(){
+    coffeeCode.focus();
+    coffeeBox.onmousedown = function(){
       var startX, startY;
       startX = void 8;
       startY = void 8;
@@ -72,6 +78,82 @@
         };
       }
     };
+    coffeeCode.addEventListener('keydown', function(eventEnter){
+      var code, caretAt, t1, t2, err;
+      if (eventEnter.keyCode === 13) {
+        code = coffeeCode.value;
+        caretAt = coffeeCode.selectionStart;
+        t1 = code[caretAt - 1];
+        t2 = code[caretAt - 2];
+        if (t1 === '\n' && t2 === '\n') {
+          try {
+            CoffeeScript.run(code);
+            return set('coffee-code', code);
+          } catch (e$) {
+            err = e$;
+            return puts(String(err));
+          }
+        }
+      }
+    });
+    result = query('#coffee-result');
+    return result.onscroll = function(){
+      var scrollTop, clientHeight, scrollHeight, diff;
+      scrollTop = result.scrollTop, clientHeight = result.clientHeight, scrollHeight = result.scrollHeight;
+      diff = scrollTop + clientHeight - scrollHeight;
+      keepEnd = diff > -10;
+      show(result, scrollTop, clientHeight, scrollHeight);
+      return show('keep-end', keepEnd);
+    };
   };
-  window.onload = main;
+  coffeeDestroy = function(){
+    var elem;
+    elem = query('#coffee-box');
+    return elem.parentElement.removeChild(elem);
+  };
+  escape = function(str){
+    var html;
+    html = str.replace(/\t/g, '  ').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return tmpl({
+      'pre.coffee-print': html
+    });
+  };
+  stringify = function(item){
+    if (typeof item === 'function') {
+      return item.toString();
+    } else if (typeof item === 'object') {
+      return JSON.stringify(item, null, 2);
+    } else {
+      return String(item);
+    }
+  };
+  window.puts = function(){
+    var args, output, result;
+    args = slice$.call(arguments);
+    output = args.map(stringify).map(escape).join('');
+    result = query('#coffee-result');
+    result.insertAdjacentHTML('beforeend', output);
+    if (keepEnd) {
+      return result.scrollTop = result.scrollHeight;
+    }
+  };
+  window.purge = function(){
+    return query('#coffee-result').innerHTML = '';
+  };
+  window.onload = function(){
+    window.addEventListener('keydown', function(){
+      var detectBox;
+      if (event.keyCode === 192) {
+        if (event.ctrlKey && !event.altKey && !event.shiftKey) {
+          detectBox = query('#coffee-box');
+          if (detectBox != null) {
+            return coffeeDestroy();
+          } else {
+            return coffeeInit();
+          }
+        }
+      }
+    });
+    return coffeeInit();
+  };
 }).call(this);

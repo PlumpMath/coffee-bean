@@ -8,9 +8,9 @@ var codearea = function(area) {
   };
   var at_line_end, at_line_sta, call_shortcut, get_col, get_row, key_backspace, key_bracket, key_bracket_close, key_ctrl_enter, key_ctrl_k, key_ctrl_l, key_ctrl_shift_d, key_ctrl_shift_down, key_ctrl_shift_enter, key_ctrl_shift_k, key_ctrl_shift_up, key_ctrl_u, key_enter, key_esc, key_home, key_quote, key_shift_tab, key_tab, o, set_position, wrap_text, write_text;
   o = function() {
-    var v;
-    v = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-    return console.log(v);
+    // var v;
+    // v = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+    // return console.log(v);
   };
   wrap_text = function() {
     var ac, all, ar, contx, end, obj, sta;
@@ -555,6 +555,9 @@ var codearea = function(area) {
     },
     221: function() {
       return key_bracket_close(']');
+    },
+    222: function() {
+      return key_quote("'");
     },
     'shift 9': key_shift_tab,
     'shift 57': function() {
