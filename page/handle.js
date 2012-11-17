@@ -138,7 +138,7 @@
     return query('#coffee-result').innerHTML = '';
   };
   window.onload = function(){
-    window.addEventListener('keydown', function(){
+    return window.addEventListener('keydown', function(){
       var detectBox;
       if (event.keyCode === 192) {
         if (event.ctrlKey && !event.altKey && !event.shiftKey) {
@@ -151,6 +151,5 @@
         }
       }
     });
-    return coffeeInit();
   };
 }).call(this);

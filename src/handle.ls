@@ -127,4 +127,4 @@ window.onload = ->
         detect-box = query \#coffee-box
         if detect-box? then coffee-destroy!
         else coffee-init!
-  coffee-init!
+  # coffee-init!
