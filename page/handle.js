@@ -79,13 +79,10 @@
       }
     };
     coffeeCode.addEventListener('keydown', function(eventEnter){
-      var code, caretAt, t1, t2, err;
+      var code, err;
       if (eventEnter.keyCode === 13) {
         code = coffeeCode.value;
-        caretAt = coffeeCode.selectionStart;
-        t1 = code[caretAt - 1];
-        t2 = code[caretAt - 2];
-        if (t1 === '\n' && t2 === '\n') {
+        if (eventEnter.altKey) {
           try {
             CoffeeScript.run(code);
             return set('coffee-code', code);

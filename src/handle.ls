@@ -52,6 +52,7 @@ coffee-init = ->
             diff-y = event.client-y - start-y
             # show \diff diff-x, diff-y
 
+            # body = document.body
             now-x = coffee-box.offset-left + diff-x
             now-y = coffee-box.offset-top + diff-y
 
@@ -74,10 +75,7 @@ coffee-init = ->
     if event-enter.key-code is 13
       # show \here event-enter.key-code
       code = coffee-code.value
-      caret-at = coffee-code.selection-start
-      t1 = code[caret-at - 1]
-      t2 = code[caret-at - 2]
-      if t1 is '\n' and t2 is '\n'
+      if event-enter.alt-key
         try
           CoffeeScript.run code
           set \coffee-code code
