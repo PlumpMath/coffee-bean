@@ -5,7 +5,8 @@ I haven't put it on a Google Web Store. I'll do when this looks good.
 By now you can `git clone` this repo and install it manually.
 
 Use `ctrl backquote` to fire it, also disable it by doing this.  
-Write CoffeeScript on the left, press `alt enter` to evel the code.
+Write CoffeeScript on the left, press `alt enter` to evel the code.  
+Drag that box with mouse by pressing `ctrl` in the meanwhile.
 
 There are two funcitons `puts() purge()` to write and clear.  
 And `select()` function as shortcut for `document.querySelector`.  

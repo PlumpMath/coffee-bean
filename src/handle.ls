@@ -14,12 +14,20 @@ coffee-init = ->
       '/coffee-result': ''
 
   body = (query 'body')
-  show body
+  # show body
   body.insertAdjacentHTML 'beforeend', (tmpl area)
 
   coffee-box = query \#coffee-box
   coffee-code = coffee-box.querySelector \#coffee-code
-  show \new coffee-code
+  # show \new coffee-code
+
+  place-top = document.body.scroll-top + 100
+  place-left =  document.body.scroll-left + 200
+  # show place-top, place-left
+  coffee-box.style.top = "#{place-top}px"
+  coffee-box.style.left = "#{place-left}px"
+  # show coffee-box.style
+
   codearea coffee-code
   last-code = get \coffee-code
   if last-code? then coffee-code.value = that

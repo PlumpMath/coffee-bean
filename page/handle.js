@@ -19,7 +19,7 @@
     return localStorage.getItem(key);
   };
   coffeeInit = function(){
-    var area, body, coffeeBox, coffeeCode, lastCode, that, coffeeDrag, ctrlPressed, result;
+    var area, body, coffeeBox, coffeeCode, placeTop, placeLeft, lastCode, that, coffeeDrag, ctrlPressed, result;
     area = {
       "/coffee-box": {
         'textarea/coffee-code': '',
@@ -27,11 +27,13 @@
       }
     };
     body = query('body');
-    show(body);
     body.insertAdjacentHTML('beforeend', tmpl(area));
     coffeeBox = query('#coffee-box');
     coffeeCode = coffeeBox.querySelector('#coffee-code');
-    show('new', coffeeCode);
+    placeTop = document.body.scrollTop + 100;
+    placeLeft = document.body.scrollLeft + 200;
+    coffeeBox.style.top = placeTop + "px";
+    coffeeBox.style.left = placeLeft + "px";
     codearea(coffeeCode);
     lastCode = get('coffee-code');
     if ((that = lastCode) != null) {
