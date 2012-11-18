@@ -1,5 +1,5 @@
 (function(){
-  var delay, query, keepEnd, set, get, coffeeInit, coffeeDestroy, escape, stringify, slice$ = [].slice;
+  var delay, query, keepEnd, set, get, coffeeInit, coffeeDestroy, escape, stringify, onload, slice$ = [].slice;
   delay = function(){
     return setTimeout(arguments[1](arguments[0]));
   };
@@ -138,7 +138,7 @@
     return query('#coffee-result').innerHTML = '';
   };
   window.select = query;
-  window.onload = function(){
+  (onload = function(){
     return window.addEventListener('keydown', function(){
       var detectBox;
       if (event.keyCode === 192) {
@@ -152,5 +152,5 @@
         }
       }
     });
-  };
+  })();
 }).call(this);

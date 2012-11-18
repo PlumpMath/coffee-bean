@@ -121,7 +121,7 @@ window.purge = ->
 
 window.select = query
 
-window.onload = ->
+do onload = ->
   window.add-event-listener \keydown ->
     # show it
     if event.key-code is 192
