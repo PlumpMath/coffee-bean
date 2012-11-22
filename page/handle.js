@@ -140,6 +140,14 @@
     return query('#coffee-result').innerHTML = '';
   };
   window.select = query;
+  window.all = function(str){
+    return document.querySelectorAll(str);
+  };
+  window.log = function(){
+    var args;
+    args = slice$.call(arguments);
+    return console.log.apply(console, args);
+  };
   (onload = function(){
     return window.addEventListener('keydown', function(){
       var detectBox;

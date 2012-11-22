@@ -128,6 +128,8 @@ window.purge = ->
   (query '#coffee-result').innerHTML = ''
 
 window.select = query
+window.all = (str) -> document.query-selector-all str
+window.log = (...args) -> console.log.apply console, args
 
 do onload = ->
   window.add-event-listener \keydown ->
